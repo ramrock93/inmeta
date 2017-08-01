@@ -9,6 +9,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 
 import com.example.models.Order;
 import com.example.repositories.OrderRepository;
@@ -24,6 +25,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 @SpringComponent
+@Scope("prototype")
 public class OrdersLayout extends VerticalLayout {
 
 	private Grid<Order> grid;

@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 
 import com.example.models.Order;
 import com.example.models.Service;
@@ -25,6 +26,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 @SpringComponent
+@Scope("prototype")
 public class OrderFormLayout extends VerticalLayout {
 
 	private TextField costumerNameField;

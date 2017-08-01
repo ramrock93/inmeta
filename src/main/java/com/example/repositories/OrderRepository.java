@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.models.Order;
 
+@Scope("prototype")
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
 	public List<Order> findByCostumerName(String costumerName);
