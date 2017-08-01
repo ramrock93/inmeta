@@ -1,4 +1,4 @@
-package cm.example.controllers;
+package com.example.controllers;
 
 import java.util.List;
 
