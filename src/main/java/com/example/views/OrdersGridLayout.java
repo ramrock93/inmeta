@@ -26,7 +26,7 @@ import com.vaadin.ui.themes.ValoTheme;
 
 @SpringComponent
 @Scope("prototype")
-public class OrdersLayout extends VerticalLayout {
+public class OrdersGridLayout extends VerticalLayout {
 
 	private Grid<Order> grid;
 	private TextField searchField;

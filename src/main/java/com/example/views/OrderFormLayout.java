@@ -38,9 +38,9 @@ public class OrderFormLayout extends VerticalLayout {
 	private DateField dateField;
 	private TextArea textAreaField;
 
-	private Button saveOrder;
-	private Button deleteOrder;
-	private Button cancelOrder;
+	private Button saveOrdeButton;
+	private Button deleteOrderButton;
+	private Button cancelOrderButton;
 
 	private HorizontalLayout nameAndPhoneLayout;
 	private HorizontalLayout toAndFromAddressLayout;
@@ -78,19 +78,19 @@ public class OrderFormLayout extends VerticalLayout {
 		textAreaField = new TextArea("Description");
 		textAreaField.setWidth("100%");
 
-		saveOrder = new Button("Save", e -> {
+		saveOrdeButton = new Button("Save", e -> {
 			saveOrder(this.currentOrder);
 			clearFields();
 		});
-		saveOrder.setIcon(VaadinIcons.DATABASE);
+		saveOrdeButton.setIcon(VaadinIcons.DATABASE);
 
-		cancelOrder = new Button("Cancel", VaadinIcons.CLOSE);
-		cancelOrder.addClickListener(e -> {
+		cancelOrderButton = new Button("Cancel", VaadinIcons.CLOSE);
+		cancelOrderButton.addClickListener(e -> {
 			clearFields();
 		});
 
-		deleteOrder = new Button("Delete", VaadinIcons.TRASH);
-		deleteOrder.addClickListener(e -> {
+		deleteOrderButton = new Button("Delete", VaadinIcons.TRASH);
+		deleteOrderButton.addClickListener(e -> {
 			deleteOrder(this.currentOrder);
 		});
 
@@ -103,12 +103,12 @@ public class OrderFormLayout extends VerticalLayout {
 		servicesAndDateLayout = new HorizontalLayout(servicesCombo, dateField);
 		servicesAndDateLayout.setWidth("100%");
 
-		buttonsLayout = new HorizontalLayout(saveOrder, cancelOrder, deleteOrder);
-		buttonsLayout.setExpandRatio(cancelOrder, 1.0f);
+		buttonsLayout = new HorizontalLayout(saveOrdeButton, cancelOrderButton, deleteOrderButton);
+		buttonsLayout.setExpandRatio(cancelOrderButton, 1.0f);
 		buttonsLayout.setWidth("100%");
-		buttonsLayout.setComponentAlignment(deleteOrder, Alignment.TOP_RIGHT);
-		buttonsLayout.setComponentAlignment(saveOrder, Alignment.MIDDLE_LEFT);
-		buttonsLayout.setComponentAlignment(cancelOrder, Alignment.MIDDLE_LEFT);
+		buttonsLayout.setComponentAlignment(deleteOrderButton, Alignment.TOP_RIGHT);
+		buttonsLayout.setComponentAlignment(saveOrdeButton, Alignment.MIDDLE_LEFT);
+		buttonsLayout.setComponentAlignment(cancelOrderButton, Alignment.MIDDLE_LEFT);
 
 		addComponents(nameAndPhoneLayout, emailField, toAndFromAddressLayout, servicesAndDateLayout, textAreaField,
 				buttonsLayout);
@@ -161,5 +161,7 @@ public class OrderFormLayout extends VerticalLayout {
 		this.currentOrder = null;
 		clearFields();
 	}
+	
+	
 
 }

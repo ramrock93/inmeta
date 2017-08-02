@@ -3,7 +3,7 @@ package com.example;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.views.OrderFormLayout;
-import com.example.views.OrdersLayout;
+import com.example.views.OrdersGridLayout;
 import com.vaadin.annotations.Theme;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.VaadinRequest;
@@ -18,7 +18,7 @@ public class OrderSoftUI extends UI {
 	private HorizontalSplitPanel splitPanel;
 	
 	@Autowired
-	OrdersLayout ordersLayout;
+	OrdersGridLayout ordersGridLayout;
 	
 	@Autowired
 	OrderFormLayout orderForm;
@@ -28,17 +28,17 @@ public class OrderSoftUI extends UI {
 		splitPanel = new HorizontalSplitPanel();
 		splitPanel.setWidth("100%");
 		
-		ordersLayout.getGrid().asSingleSelect().addValueChangeListener(evt -> {
+		ordersGridLayout.getGrid().asSingleSelect().addValueChangeListener(evt -> {
 			orderForm.setOrder(evt.getValue());
 		});
-		ordersLayout.update();
+		ordersGridLayout.update();
 		
-		splitPanel.setFirstComponent(ordersLayout);
+		splitPanel.setFirstComponent(ordersGridLayout);
 		orderForm.setWidth("80%");
 		splitPanel.setSecondComponent(orderForm);		
 		
 		setContent(splitPanel);
-		ordersLayout.update();
+		ordersGridLayout.update();
 	}
-
+	
 }
