@@ -1,5 +1,7 @@
 package com.example.models;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +22,7 @@ public class Order {
 	private String fromAddress;
 	private String toAddress;
 	private String description;
-	private String date;
+	private Date date;
 
 	private Service service;
 
@@ -28,7 +30,7 @@ public class Order {
 	}
 
 	public Order(String costumerName, int phoneNumber, String email, String fromAddress, String toAddress,
-			Service service, String description, String date) {
+			Service service, String description, Date date) {
 
 		super();
 		this.costumerName = costumerName;
@@ -98,11 +100,11 @@ public class Order {
 		this.service = service;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

@@ -13,6 +13,7 @@ import com.example.models.Service;
 import com.example.repositories.OrderRepository;
 import com.vaadin.data.Binder;
 import com.vaadin.data.converter.LocalDateTimeToDateConverter;
+import com.vaadin.data.converter.LocalDateToDateConverter;
 import com.vaadin.data.converter.StringToIntegerConverter;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.spring.annotation.SpringComponent;
@@ -139,6 +140,9 @@ public class OrderFormLayout extends VerticalLayout {
 		this.binder.bind(this.toAddressField, Order::getFromAddress, Order::setFromAddress);
 		this.binder.bind(this.servicesCombo, Order::getService, Order::setService);
 		this.binder.bind(this.textAreaField, Order::getDescription, Order::setDescription);
+		this.binder.forField(dateField)
+			.withConverter(new LocalDateToDateConverter())
+			.bind(Order::getDate, Order::setDate);
 	}
 
 	public void saveOrder(Order order) {
