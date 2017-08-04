@@ -102,6 +102,29 @@ public class OrderFormLayout extends VerticalLayout {
 	}
 
 	private void setupAndConfigureFormButtons() {
+		setupAndConfigureSaveOrderButton();
+		setupAndConfigureCancelOrderButton();
+		setupAndConfigureDeleteOrderButton();
+	}
+
+	private void setupAndConfigureDeleteOrderButton() {
+		deleteOrderButton = new Button("Delete", VaadinIcons.TRASH);
+		deleteOrderButton.setStyleName(ValoTheme.BUTTON_DANGER);
+		deleteOrderButton.addClickListener(e -> {
+			deleteOrder(this.currentOrder);
+		});
+	}
+
+	private void setupAndConfigureCancelOrderButton() {
+		cancelOrderButton = new Button("Cancel", VaadinIcons.CLOSE);
+		cancelOrderButton.setStyleName(ValoTheme.BUTTON_FRIENDLY);
+		cancelOrderButton.addClickListener(e -> {
+			clearFields();
+			this.currentOrder = null;
+		});
+	}
+
+	private void setupAndConfigureSaveOrderButton() {
 		saveOrderButton = new Button("Save", e -> {
 			saveOrder(this.currentOrder);
 			this.currentOrder = null;
@@ -109,19 +132,6 @@ public class OrderFormLayout extends VerticalLayout {
 		});
 		saveOrderButton.setIcon(VaadinIcons.DATABASE);
 		saveOrderButton.setStyleName(ValoTheme.BUTTON_PRIMARY);
-
-		cancelOrderButton = new Button("Cancel", VaadinIcons.CLOSE);
-		cancelOrderButton.setStyleName(ValoTheme.BUTTON_FRIENDLY);
-		cancelOrderButton.addClickListener(e -> {
-			clearFields();
-			this.currentOrder = null;
-		});
-
-		deleteOrderButton = new Button("Delete", VaadinIcons.TRASH);
-		deleteOrderButton.setStyleName(ValoTheme.BUTTON_DANGER);
-		deleteOrderButton.addClickListener(e -> {
-			deleteOrder(this.currentOrder);
-		});
 	}
 
 	private void setupAndConfigureFormFields() {
