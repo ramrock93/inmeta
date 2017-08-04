@@ -49,5 +49,4 @@ public class OrderSoftUI extends UI {
 		setContent(splitPanel);
 		ordersGridLayout.update();
 	}
-
 }

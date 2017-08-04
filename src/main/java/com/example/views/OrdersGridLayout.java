@@ -31,7 +31,6 @@ public class OrdersGridLayout extends VerticalLayout implements ChangeHandler{
 
 	private Grid<Order> grid;
 	private TextField searchField;
-	private Button searchButton;
 
 	private HorizontalLayout searchLayout;
 
@@ -61,16 +60,11 @@ public class OrdersGridLayout extends VerticalLayout implements ChangeHandler{
 
 		searchField.setValueChangeMode(ValueChangeMode.EAGER);
 
-		searchButton = new Button();
-		searchButton.setStyleName(ValoTheme.BUTTON_PRIMARY);
-		searchButton.setIcon(VaadinIcons.SEARCH);
-
 		searchLayout = new HorizontalLayout();
 		searchLayout.setStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
 		searchLayout.setStyleName(ValoTheme.LAYOUT_HORIZONTAL_WRAPPING);
 
 		searchLayout.addComponentsAndExpand(searchField);
-		searchLayout.addComponent(searchButton);
 
 		addComponent(searchLayout);
 		addComponentsAndExpand(grid);
