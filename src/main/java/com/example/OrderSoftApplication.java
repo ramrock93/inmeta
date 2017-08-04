@@ -1,5 +1,6 @@
 package com.example;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -27,17 +28,18 @@ public class OrderSoftApplication {
 	public CommandLineRunner loadData(OrderRepository repository) {
 		return (args) -> {
 			// save a couple of customers
-			repository.save(new Order("Ramin Esfandiari", 48367767, "ramin_esfandiari_93@hotmail.com", "Vågavegen 29, 6008 Ålesund", "Kirkealleen 86, 3470 Slemmestad", Service.MOVING, "", new Date()));
-			repository.save(new Order("Ramin Esfandiari", 48367767, "ramin_esfandiari_93@hotmail.com", "VKirkealleen 86, 3470 Slemmestad", "Nydalsveien 33, 0484 Oslo", Service.CLEANING, "", new Date()));
-			repository.save(new Order("Golshid Bahadorian", 948110115, "golshidb@hotmail.com", "Vågavegen 29, 6008 Ålesund", "Tevlingveien 115E, 0180 Oslo", Service.MOVING, "", new Date()));
-			repository.save(new Order("Ola Normann", 45456321, "olaNor@hotmail.com", "Humleveien, 5001 Harstad", "Norgesveien 20, 0101 Oslo", Service.PACKING, "", new Date()));
-			repository.save(new Order("Inga Vertdal", 21025685, "inga@hotmail.com", "verdalsveien 1, 2021 Vartdal", "verdalsveien 1, 2021 Vartdal", Service.CLEANING, "", new Date()));
+			repository.save(new Order("Ramin Esfandiari", 48367767, "ramin_esfandiari_93@hotmail.com", "Vågavegen 29, 6008 Ålesund", "Kirkealleen 86, 3470 Slemmestad", Service.MOVING, "", LocalDate.of(2017, 8, 20)));
 			
-			repository.save(new Order("Jamileh Zare", 45638585, "jamilehzare@gmail.com", "Kirkealleen 86, 3470 Slemmestad", "Kirkealleen 86, 3470 Slemmestad", Service.CLEANING, "", new Date()));
-			repository.save(new Order("Darius Zare Esfandiari", 41380761, "dariuszare94@hotmail.com", "VKirkealleen 86, 3470 Slemmestad", "Nydalsveien 50, 0484 Oslo", Service.MOVING, "", new Date()));
-			repository.save(new Order("Kenneth Fjukstad", 97106222, "k.fjukstad@gmail.com", "Voldavegen 1, 6200 Volda", "Nedre Strandgate 20, 6005 Ålesund", Service.MOVING, "", new Date()));
-			repository.save(new Order("Kenneth Fjukstad", 97106222, "k.fjukstad@gmail.com", "Voldavegen 1, 6200 Volda", "Nedre Strandgate 20, 6005 Ålesund", Service.CLEANING, "", new Date()));
-			repository.save(new Order("Kenneth Fjukstad", 97106222, "k.fjukstad@gmail.com", "Voldavegen 1, 6200 Volda", "Nedre Strandgate 20, 6005 Ålesund", Service.PACKING, "", new Date()));
+			repository.save(new Order("Ramin Esfandiari", 48367767, "ramin_esfandiari_93@hotmail.com", "VKirkealleen 86, 3470 Slemmestad", "Nydalsveien 33, 0484 Oslo", Service.CLEANING, "", LocalDate.of(2017, 8, 25)));
+			repository.save(new Order("Golshid Bahadorian", 948110115, "golshidb@hotmail.com", "Vågavegen 29, 6008 Ålesund", "Tevlingveien 115E, 0180 Oslo", Service.MOVING, "", LocalDate.of(2017, 8, 9)));
+			repository.save(new Order("Ola Normann", 45456321, "olaNor@hotmail.com", "Humleveien, 5001 Harstad", "Norgesveien 20, 0101 Oslo", Service.PACKING, "", LocalDate.of(2017, 8, 6)));
+			repository.save(new Order("Inga Vertdal", 21025685, "inga@hotmail.com", "verdalsveien 1, 2021 Vartdal", "verdalsveien 1, 2021 Vartdal", Service.CLEANING, "", LocalDate.of(2017, 9, 1)));
+			
+			repository.save(new Order("Jamileh Zare", 45638585, "jamilehzare@gmail.com", "Kirkealleen 86, 3470 Slemmestad", "Kirkealleen 86, 3470 Slemmestad", Service.CLEANING, "", LocalDate.of(2017, 8, 10)));
+			repository.save(new Order("Darius Zare Esfandiari", 41380761, "dariuszare94@hotmail.com", "VKirkealleen 86, 3470 Slemmestad", "Nydalsveien 50, 0484 Oslo", Service.MOVING, "", LocalDate.of(2017, 8, 12)));
+			repository.save(new Order("Kenneth Fjukstad", 97106222, "k.fjukstad@gmail.com", "Voldavegen 1, 6200 Volda", "Nedre Strandgate 20, 6005 Ålesund", Service.MOVING, "", LocalDate.of(2017, 10, 2)));
+			repository.save(new Order("Kenneth Fjukstad", 97106222, "k.fjukstad@gmail.com", "Voldavegen 1, 6200 Volda", "Nedre Strandgate 20, 6005 Ålesund", Service.CLEANING, "", LocalDate.of(2017, 10, 3)));
+			repository.save(new Order("Kenneth Fjukstad", 97106222, "k.fjukstad@gmail.com", "Voldavegen 1, 6200 Volda", "Nedre Strandgate 20, 6005 Ålesund", Service.PACKING, "", LocalDate.of(2017, 10, 1)));
 
 			// fetch all customers
 			log.info("Customers found with findAll():");

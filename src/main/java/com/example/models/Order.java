@@ -1,5 +1,6 @@
 package com.example.models;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ public class Order {
 	private String fromAddress;
 	private String toAddress;
 	private String description;
-	private Date date;
+	private LocalDate date;
 
 	private Service service;
 
@@ -30,7 +31,7 @@ public class Order {
 	}
 
 	public Order(String costumerName, int phoneNumber, String email, String fromAddress, String toAddress,
-			Service service, String description, Date date) {
+			Service service, String description, LocalDate date) {
 
 		super();
 		this.costumerName = costumerName;
@@ -100,11 +101,11 @@ public class Order {
 		this.service = service;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

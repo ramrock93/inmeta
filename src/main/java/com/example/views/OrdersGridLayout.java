@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
+import com.example.models.ChangeHandler;
 import com.example.models.Order;
 import com.example.repositories.OrderRepository;
 import com.vaadin.event.selection.SelectionListener;
@@ -26,7 +27,7 @@ import com.vaadin.ui.themes.ValoTheme;
 
 @SpringComponent
 @Scope("prototype")
-public class OrdersGridLayout extends VerticalLayout {
+public class OrdersGridLayout extends VerticalLayout implements ChangeHandler{
 
 	private Grid<Order> grid;
 	private TextField searchField;
@@ -100,9 +101,9 @@ public class OrdersGridLayout extends VerticalLayout {
 	public void addSelectionListener(SelectionListener<Order> listener) {
 		grid.addSelectionListener(listener);
 	}
-	
-	public void addGridValueChangeListener()
-	{
-	
+
+	@Override
+	public void onChange() {
+		update();
 	}
 }

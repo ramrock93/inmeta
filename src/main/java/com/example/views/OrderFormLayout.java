@@ -1,18 +1,20 @@
 package com.example.views;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
+import com.example.models.ChangeHandler;
 import com.example.models.Order;
 import com.example.models.Service;
 import com.example.repositories.OrderRepository;
 import com.vaadin.data.Binder;
-import com.vaadin.data.converter.LocalDateTimeToDateConverter;
+import com.vaadin.data.Result;
+import com.vaadin.data.ValueContext;
 import com.vaadin.data.converter.LocalDateToDateConverter;
 import com.vaadin.data.converter.StringToIntegerConverter;
 import com.vaadin.icons.VaadinIcons;
@@ -22,6 +24,8 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -72,9 +76,9 @@ public class OrderFormLayout extends VerticalLayout {
 		servicesCombo = new ComboBox<>("Choose Service:");
 		servicesCombo.setWidth("100%");
 		servicesCombo.setItems(Service.values());
-		dateField = new DateField("Date");
+		dateField = new DateField("Date (YYYY-MM-DD)");
 		dateField.setWidth("100%");
-		dateField.setDateFormat("dd.MM.yy");
+		dateField.setDateFormat("yyyy-MM-dd");
 
 		textAreaField = new TextArea("Description");
 		textAreaField.setWidth("100%");
@@ -140,15 +144,31 @@ public class OrderFormLayout extends VerticalLayout {
 		this.binder.bind(this.toAddressField, Order::getFromAddress, Order::setFromAddress);
 		this.binder.bind(this.servicesCombo, Order::getService, Order::setService);
 		this.binder.bind(this.textAreaField, Order::getDescription, Order::setDescription);
-		this.binder.forField(dateField)
-			.withConverter(new LocalDateToDateConverter())
-			.bind(Order::getDate, Order::setDate);
+		this.binder.bind(this.dateField, Order::getDate, Order::setDate);
 	}
 
 	public void saveOrder(Order order) {
-		repo.save(order);
+
+		if (order != null) {
+			repo.save(order);
+		} else {
+
+			try {
+				Order newOrder = new Order(costumerNameField.getValue(), Integer.parseInt(phoneNumberField.getValue()),
+						emailField.getValue(), fromAddressField.getValue(), toAddressField.getValue(),
+						servicesCombo.getValue(), textAreaField.getValue(), dateField.getValue());
+				repo.save(newOrder);
+			} catch (NumberFormatException nfex) {
+				Notification.show("Error", "Input a valid phonenumber, e.g. 48367767.", Type.ERROR_MESSAGE);
+			}
+		}
 	}
 
+	public void setChangeHandler(ChangeHandler changeHandler) {
+		saveOrdeButton.addClickListener(e -> changeHandler.onChange());
+		deleteOrderButton.addClickListener(e -> changeHandler.onChange());
+	}
+	
 	public void clearFields() {
 		costumerNameField.clear();
 		phoneNumberField.clear();
@@ -165,7 +185,5 @@ public class OrderFormLayout extends VerticalLayout {
 		this.currentOrder = null;
 		clearFields();
 	}
-	
-	
 
 }
