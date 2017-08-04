@@ -1,8 +1,6 @@
 package com.example.views;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -47,9 +45,10 @@ public class OrdersGridLayout extends VerticalLayout implements ChangeHandler{
 		this.grid.setColumns("service", "costumerName", "date");
 
 		searchField = new TextField();
-		searchField.setPlaceholder("Filter by costumer name...");
+		searchField.setPlaceholder("Filter by customer name...");
 		searchField.setEnabled(true);
-		searchField.setDescription("Not implemented yet!");
+		searchField.setIcon(VaadinIcons.SEARCH);
+		searchField.setStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
 
 		searchField.addValueChangeListener(e -> {
 			grid.setItems(update(e.getValue()));

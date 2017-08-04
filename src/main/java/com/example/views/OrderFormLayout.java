@@ -26,6 +26,7 @@ import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 
 @SpringComponent
 @Scope("prototype")
@@ -54,7 +55,7 @@ public class OrderFormLayout extends VerticalLayout {
 
 	private TextArea textAreaField;
 
-	private Button saveOrdeButton;
+	private Button saveOrderButton;
 	private Button deleteOrderButton;
 	private Button cancelOrderButton;
 
@@ -89,11 +90,11 @@ public class OrderFormLayout extends VerticalLayout {
 		servicesAndDateLayout = new HorizontalLayout(servicesCombo, dateField);
 		servicesAndDateLayout.setWidth("100%");
 
-		buttonsLayout = new HorizontalLayout(saveOrdeButton, cancelOrderButton, deleteOrderButton);
+		buttonsLayout = new HorizontalLayout(saveOrderButton, cancelOrderButton, deleteOrderButton);
 		buttonsLayout.setExpandRatio(cancelOrderButton, 1.0f);
 		buttonsLayout.setWidth("100%");
 		buttonsLayout.setComponentAlignment(deleteOrderButton, Alignment.TOP_RIGHT);
-		buttonsLayout.setComponentAlignment(saveOrdeButton, Alignment.MIDDLE_LEFT);
+		buttonsLayout.setComponentAlignment(saveOrderButton, Alignment.MIDDLE_LEFT);
 		buttonsLayout.setComponentAlignment(cancelOrderButton, Alignment.MIDDLE_LEFT);
 
 		addComponents(nameAndPhoneLayout, emailField, toAndFromAddressLayout, servicesAndDateLayout, textAreaField,
@@ -101,20 +102,23 @@ public class OrderFormLayout extends VerticalLayout {
 	}
 
 	private void setupAndConfigureFormButtons() {
-		saveOrdeButton = new Button("Save", e -> {
+		saveOrderButton = new Button("Save", e -> {
 			saveOrder(this.currentOrder);
 			this.currentOrder = null;
 			clearFields();
 		});
-		saveOrdeButton.setIcon(VaadinIcons.DATABASE);
+		saveOrderButton.setIcon(VaadinIcons.DATABASE);
+		saveOrderButton.setStyleName(ValoTheme.BUTTON_PRIMARY);
 
 		cancelOrderButton = new Button("Cancel", VaadinIcons.CLOSE);
+		cancelOrderButton.setStyleName(ValoTheme.BUTTON_FRIENDLY);
 		cancelOrderButton.addClickListener(e -> {
 			clearFields();
 			this.currentOrder = null;
 		});
 
 		deleteOrderButton = new Button("Delete", VaadinIcons.TRASH);
+		deleteOrderButton.setStyleName(ValoTheme.BUTTON_DANGER);
 		deleteOrderButton.addClickListener(e -> {
 			deleteOrder(this.currentOrder);
 		});
@@ -367,7 +371,7 @@ public class OrderFormLayout extends VerticalLayout {
 	}
 
 	public void setChangeHandler(ChangeHandler changeHandler) {
-		saveOrdeButton.addClickListener(e -> changeHandler.onChange());
+		saveOrderButton.addClickListener(e -> changeHandler.onChange());
 		deleteOrderButton.addClickListener(e -> changeHandler.onChange());
 	}
 
