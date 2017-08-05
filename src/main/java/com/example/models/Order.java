@@ -9,6 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 @Entity
 @Table(name = "order_table")
 public class Order {
@@ -23,11 +28,13 @@ public class Order {
 	private String fromAddress;
 	private String toAddress;
 	private String description;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate date;
 
 	private Service service;
 
-	protected Order() {
+	public Order() {
 	}
 
 	public Order(String costumerName, int phoneNumber, String email, String fromAddress, String toAddress,

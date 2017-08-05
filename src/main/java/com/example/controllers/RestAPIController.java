@@ -18,16 +18,19 @@ public class RestAPIController {
 	@Autowired
 	OrderRepository repo;
 
-	@RequestMapping("/orders")
-	public List<Order> findAll() {
+	@RequestMapping("/api/orders")
+	public List<Order> getAllOrders() {
 
 		return repo.findAll();
 	}
 
-	@RequestMapping(value = "/orders/{costumerName}", method = RequestMethod.GET)
-	public List<Order> findOrderByName(@PathVariable("costumerName") String costumerName) {
-
-		return repo.findByCostumerName(costumerName);
-
+	@RequestMapping(value = "/api/orders/{customerName}", method = RequestMethod.GET)
+	public List<Order> getOrder(@PathVariable("costumerName") String customerName) {
+		return repo.findByCostumerName(customerName);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/api/orders")
+	public void addOrder(@RequestBody Order newOrder) {
+		repo.save(newOrder);
 	}
 }
