@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  * phone number, email, what kind of service to be ordered, when it is to be
  * carried out, and etc.
  * 
- * @author @Ramin Esfandiari</br>
+ * @author Ramin Esfandiari</br>
  *         7. aug. 2017
  *
  */

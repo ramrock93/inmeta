@@ -14,7 +14,7 @@ import com.example.repositories.OrderRepository;
 
 /**
  * 
- * @author @Ramin Esfandiari </br>
+ * @author Ramin Esfandiari </br>
  * 
  *         7. aug. 2017 </br>
  *         </br>
