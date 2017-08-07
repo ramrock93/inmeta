@@ -39,11 +39,10 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!-- <dependency> -->
-		<!-- <groupId>org.vaadin.addons</groupId> -->
-		<!-- <artifactId>searchbox</artifactId> -->
-		<!-- <version>0.1.0</version> -->
-		<!-- </dependency> -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -107,7 +106,7 @@
 							<goal>resources</goal>
 							<!-- <goal>update-theme</goal> -->
 							<goal>update-widgetset</goal>
-<!-- 							<goal>compile-theme</goal> -->
+							<!-- <goal>compile-theme</goal> -->
 							<goal>compile</goal>
 						</goals>
 					</execution>
