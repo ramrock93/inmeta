@@ -233,7 +233,7 @@ public class OrderFormLayout extends VerticalLayout {
 	private void setupFormBinding(Order order) {
 		this.binder.setBean(order);
 
-		this.binder.bind(this.costumerNameField, Order::getCostumerName, Order::setCostumerName);
+		this.binder.bind(this.costumerNameField, Order::getCustomerName, Order::setCustomerName);
 
 		this.binder.forField(phoneNumberField)
 				.withConverter(new StringToIntegerConverter("Input value should be an integer"))

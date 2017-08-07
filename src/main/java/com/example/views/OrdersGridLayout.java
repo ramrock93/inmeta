@@ -80,7 +80,7 @@ public class OrdersGridLayout extends VerticalLayout implements ChangeHandler{
 		for (Iterator<Order> it = allOrders.iterator(); it.hasNext();) {
 			Order order = (Order) it.next();
 
-			if (order.getCostumerName().trim().toLowerCase().contains(searchString.toLowerCase().trim())) {
+			if (order.getCustomerName().trim().toLowerCase().contains(searchString.toLowerCase().trim())) {
 				filterdOrder.add(order);
 			}
 		}
