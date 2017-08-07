@@ -71,7 +71,7 @@ public class OrdersGridLayout extends VerticalLayout implements ChangeHandler {
 		 */
 		this.grid = new Grid<>(Order.class);
 		this.grid.setWidth("100%");
-		this.grid.setColumns("service", "costumerName", "date");
+		this.grid.setColumns("service", "customerName", "date");
 
 		/*
 		 * Instantiate the search field. Set a placeholder for the empty field. Add an
