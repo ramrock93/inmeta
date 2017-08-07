@@ -58,7 +58,7 @@ public class CrudRestServiceApiController {
 	 */
 	@RequestMapping(value = "/api/orders/{customerName}", method = RequestMethod.GET)
 	public List<Order> getOrder(@PathVariable("customerName") String customerName) {
-		return repo.findByCostumerName(customerName); // Find and return all registered orders for given customer.
+		return repo.findByCustomerName(customerName); // Find and return all registered orders for given customer.
 	}
 
 	/**
