@@ -1,36 +1,50 @@
 package com.example.models;
 
-/**
- * The Service enum represents all the possible services that the OrderSoft
- * provides.
- * 
- * @author Ramin Esfandiari </br>
- *         7. aug. 2017 </br>
- *
- */
-public enum Service {
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-	MOVING("Moving"), PACKING("Packing"), CLEANING("Cleaning");
+@Entity
+@Table(name = "service_table")
+public class Service {
 
-	private String name; // The name of the service.
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 
-	/**
-	 * Constructs a new Service object.
-	 * 
-	 * @param name
-	 *            The name of the service to create.
-	 */
-	Service(String name) {
-		this.name = name;
+	@Enumerated
+	private ServiceTypes serviceType;
+	
+	@ManyToOne
+	private Order order;
+
+	public Service(ServiceTypes type) {
+		super();
+		this.serviceType = type;
 	}
 
-	/**
-	 * Gets the name of this service.
-	 * 
-	 * @return
-	 */
-	public String getName() {
-		return this.name;
+	private Service() {
+
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public ServiceTypes getService() {
+		return serviceType;
+	}
+
+	public Service setService(ServiceTypes service) {
+		this.serviceType = service;
+		return this;
+	}
 }

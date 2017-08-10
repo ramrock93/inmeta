@@ -69,15 +69,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 	public List<Order> findByCustomerName(String customerName);
 
 	/**
-	 * Finds and returns a list of orders matching the specified phone number.
-	 * 
-	 * @param phoneNumber
-	 *            The phone number to query.
-	 * @return The list of orders matching the queried phone number to return.
-	 */
-	public List<Order> findByPhoneNumber(int phoneNumber);
-
-	/**
 	 * Deletes an order given the id of the order.
 	 * 
 	 * @param id

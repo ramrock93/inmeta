@@ -1,8 +1,11 @@
 package com.example;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
+import com.example.models.Service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +15,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 
+import com.example.models.Address;
+import com.example.models.Customer;
 import com.example.models.Order;
-import com.example.models.Service;
+import com.example.models.ServiceTypes;
+import com.example.repositories.AddressRepository;
+import com.example.repositories.CustomerRepository;
 import com.example.repositories.OrderRepository;
+import com.example.repositories.ServiceRepository;
 
 /**
  * The OrderSoftApplication is the main class in OrderSoft web application.
@@ -44,47 +52,89 @@ public class OrderSoftApplication {
 	/**
 	 * This method creates some sample entries and populates the database.
 	 * 
-	 * @param repository
+	 * @param orderRepo
 	 *            The repository to add, allowing CRUD-operations.
 	 * @return The CommandLinRunner to return.
 	 */
 	@Bean
-	public CommandLineRunner loadData(OrderRepository repository) {
+	public CommandLineRunner loadData(OrderRepository orderRepo, AddressRepository addressRepo,
+			ServiceRepository serviceRepo, CustomerRepository customerRepo) {
 		return (args) -> {
-			// Create and save some orders.
-			repository.save(new Order("Ramin Esfandiari", 48367767, "ramin_esfandiari_93@hotmail.com",
-					"Vågavegen 29, 6008 Ålesund", "Kirkealleen 86, 3470 Slemmestad", Service.MOVING, "",
-					LocalDate.of(2017, 8, 20)));
 
-			repository.save(new Order("Ramin Esfandiari", 48367767, "ramin_esfandiari_93@hotmail.com",
-					"VKirkealleen 86, 3470 Slemmestad", "Nydalsveien 33, 0484 Oslo", Service.CLEANING, "",
-					LocalDate.of(2017, 8, 25)));
-			repository.save(
-					new Order("Golshid Bahadorian", 948110115, "golshidb@hotmail.com", "Vågavegen 29, 6008 Ålesund",
-							"Tevlingveien 115E, 0180 Oslo", Service.MOVING, "", LocalDate.of(2017, 8, 9)));
-			repository.save(new Order("Ola Normann", 45456321, "olaNor@hotmail.com", "Humleveien, 5001 Harstad",
-					"Norgesveien 20, 0101 Oslo", Service.PACKING, "", LocalDate.of(2017, 8, 6)));
-			repository.save(new Order("Inga Vertdal", 21025685, "inga@hotmail.com", "verdalsveien 1, 2021 Vartdal",
-					"verdalsveien 1, 2021 Vartdal", Service.CLEANING, "", LocalDate.of(2017, 9, 1)));
+			Service s1 = new Service(ServiceTypes.CLEANING);
+			Service s2 = new Service(ServiceTypes.MOVING);
+			Service s3 = new Service(ServiceTypes.PACKING);
+			Service s4 = new Service(ServiceTypes.CLEANING);
+			Service s5 = new Service(ServiceTypes.PACKING);
+			Service s6 = new Service(ServiceTypes.MOVING);
 
-			repository.save(
-					new Order("Jamileh Zare", 45638585, "jamilehzare@gmail.com", "Kirkealleen 86, 3470 Slemmestad",
-							"Kirkealleen 86, 3470 Slemmestad", Service.CLEANING, "", LocalDate.of(2017, 8, 10)));
-			repository.save(new Order("Darius Zare Esfandiari", 41380761, "dariuszare94@hotmail.com",
-					"VKirkealleen 86, 3470 Slemmestad", "Nydalsveien 50, 0484 Oslo", Service.MOVING, "",
-					LocalDate.of(2017, 8, 12)));
-			repository.save(new Order("Kenneth Fjukstad", 97106222, "k.fjukstad@gmail.com", "Voldavegen 1, 6200 Volda",
-					"Nedre Strandgate 20, 6005 Ålesund", Service.MOVING, "", LocalDate.of(2017, 10, 2)));
-			repository.save(new Order("Kenneth Fjukstad", 97106222, "k.fjukstad@gmail.com", "Voldavegen 1, 6200 Volda",
-					"Nedre Strandgate 20, 6005 Ålesund", Service.CLEANING, "", LocalDate.of(2017, 10, 3)));
-			repository.save(new Order("Kenneth Fjukstad", 97106222, "k.fjukstad@gmail.com", "Voldavegen 1, 6200 Volda",
-					"Nedre Strandgate 20, 6005 Ålesund", Service.PACKING, "", LocalDate.of(2017, 10, 1)));
+			serviceRepo.save(s1);
+			serviceRepo.save(s2);
+			serviceRepo.save(s3);
+			serviceRepo.save(s4);
+			serviceRepo.save(s5);
+			serviceRepo.save(s6);
+
+			// *******************************************************************************
+
+			Address a1 = new Address("Kirkealleen", 86, "3470", "Slemmestad", "Norge");
+			addressRepo.save(a1);
+
+			Customer c1 = new Customer("Ramin Esfandiari", 48367767, "ramin_esfandiari_93@hotmail.com", a1);
+			customerRepo.save(c1);
+
+			List<Service> cleaning_packing_moving = new LinkedList<>();
+
+			cleaning_packing_moving.add(s1);
+			cleaning_packing_moving.add(s2);
+			cleaning_packing_moving.add(s3);
+
+			Address m1 = new Address("Nydalsveien", 33, "0184", "Oslo", "Norge");
+			addressRepo.save(m1);
+
+			orderRepo
+					.save(new Order(c1, m1, "Kan ikke før 10:00.", LocalDate.of(2017, 9, 15), cleaning_packing_moving));
+
+			// ************************************************************************************************************
+
+			Address a2 = new Address("Tevlingveien", 114, "1015", "Oslo", "Norge");
+			addressRepo.save(a2);
+
+			Customer c2 = new Customer("Golshdid Bahadorian", 94811015, "golshidb@hotmail.com", a2);
+			customerRepo.save(c2);
+
+			List<Service> packing_moving = new LinkedList<>();
+			packing_moving.add(s4);
+			packing_moving.add(s5);
+
+			Address m2 = new Address("Nydalsveien", 33, "0184", "Oslo", "Norge");
+			addressRepo.save(m2);
+
+			orderRepo.save(new Order(c2, m2, "Kan ikke før 10:00.", LocalDate.of(2017, 9, 15), packing_moving));
+
+			// ************************************************************************************************************
+
+			Address a3 = new Address("Norgesveien", 1, "0001", "Oslo", "Norge");
+			addressRepo.save(a3);
+
+			Customer c3 = new Customer("Ola Normann", 12345678, "ola.normann@hotmail.com", a3);
+			customerRepo.save(c3);
+
+			List<Service> moving = new LinkedList<>();
+			moving.add(s6);
+
+			Address m3 = new Address("Norgesveien", 1, "0001", "Oslo", "Norge");
+			addressRepo.save(m3);
+
+			orderRepo.save(new Order(c3, m3, "Kan ikke før 10:00.", LocalDate.of(2017, 9, 15), moving));
+
+			// ************************************************************************************************************
 
 			// fetch all orders from database.
 			log.info("Customers found with findAll():");
 
 			log.info("-------------------------------");
-			for (Order o : repository.findAll()) {
+			for (Order o : orderRepo.findAll()) {
 				log.info(o.toString());
 			}
 			log.info("");
