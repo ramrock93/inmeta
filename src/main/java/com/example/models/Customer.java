@@ -73,13 +73,8 @@ public class Customer {
 		this.email = email;
 	}
 
-	public boolean addOrder(Order order) {
-		boolean added = false;
-
-		if (order.getId() != 0) {
-			added = this.orders.add(order);
-		}
-		return added;
+	public void addOrder(Order order) {
+		this.orders.add(order);
 	}
 
 	public Address getCurrentAddress() {

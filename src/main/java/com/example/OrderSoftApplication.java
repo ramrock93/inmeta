@@ -92,8 +92,11 @@ public class OrderSoftApplication {
 			Address m1 = new Address("Nydalsveien", 33, "0184", "Oslo", "Norge");
 			addressRepo.save(m1);
 
-			orderRepo
-					.save(new Order(c1, m1, "Kan ikke før 10:00.", LocalDate.of(2017, 9, 15), cleaning_packing_moving));
+			Order o1 = new Order(c1, m1, "Kan ikke før 10:00.", LocalDate.of(2017, 9, 15), cleaning_packing_moving);
+			orderRepo.save(o1);
+
+			c1.addOrder(o1);
+			customerRepo.save(c1);
 
 			// ************************************************************************************************************
 
@@ -110,7 +113,11 @@ public class OrderSoftApplication {
 			Address m2 = new Address("Nydalsveien", 33, "0184", "Oslo", "Norge");
 			addressRepo.save(m2);
 
-			orderRepo.save(new Order(c2, m2, "Kan ikke før 10:00.", LocalDate.of(2017, 9, 15), packing_moving));
+			Order o2 = new Order(c2, m2, "Kan ikke før 10:00.", LocalDate.of(2017, 9, 15), packing_moving);
+			orderRepo.save(o2);
+
+			c2.addOrder(o2);
+			customerRepo.save(c2);
 
 			// ************************************************************************************************************
 
@@ -126,7 +133,11 @@ public class OrderSoftApplication {
 			Address m3 = new Address("Norgesveien", 1, "0001", "Oslo", "Norge");
 			addressRepo.save(m3);
 
-			orderRepo.save(new Order(c3, m3, "Kan ikke før 10:00.", LocalDate.of(2017, 9, 15), moving));
+			Order o3 = new Order(c3, m3, "Kan ikke før 10:00.", LocalDate.of(2017, 9, 15), moving);
+			orderRepo.save(o3);
+
+			c3.addOrder(o3);
+			customerRepo.save(c3);
 
 			// ************************************************************************************************************
 
