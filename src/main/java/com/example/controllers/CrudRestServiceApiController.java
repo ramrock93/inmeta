@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.models.Customer;
 import com.example.models.Order;
+import com.example.repositories.CustomerRepository;
 import com.example.repositories.OrderRepository;
 
 /**
@@ -35,7 +37,10 @@ import com.example.repositories.OrderRepository;
 public class CrudRestServiceApiController {
 
 	@Autowired
-	OrderRepository repo; // An order repository object to handle the CRUD-operations.
+	private OrderRepository orderRepo; // An order repository object to handle the CRUD-operations.
+
+	@Autowired
+	private CustomerRepository customerRepo;
 
 	/**
 	 * Maps this method to the corresponding GET request from the client-side.
@@ -44,7 +49,7 @@ public class CrudRestServiceApiController {
 	 */
 	@RequestMapping("/api/orders") // Value and RequestMethod.GET by default.
 	public List<Order> getAllOrders() {
-		return repo.findAll(); // Find and return all orders from database.
+		return orderRepo.findAll(); // Find and return all orders from database.
 	}
 
 	/**
@@ -56,17 +61,19 @@ public class CrudRestServiceApiController {
 	 *            parameter in the URI.
 	 * @return The list of orders for the queried customer.
 	 */
-	/*@RequestMapping(value = "/api/orders/{customerName}", method = RequestMethod.GET)
-	public List<Order> getOrder(@PathVariable("customerName") String customerName) {
-		return repo.findByCustomerName(customerName); // Find and return all registered orders for given customer.
-	}*/
+	/*
+	 * @RequestMapping(value = "/api/orders/{customerName}", method =
+	 * RequestMethod.GET) public List<Order> getOrder(@PathVariable("customerName")
+	 * String customerName) { return orderRepo.findByCustomerName(customerName); //
+	 * Find and return all registered orders for given customer. }
+	 */
 
 	@RequestMapping(value = "/api/orders/{id}", method = RequestMethod.GET)
 	public Order getOrder(@PathVariable("id") long id) {
 
-		Order o = repo.findOrderById(id);
+		Order o = orderRepo.findOrderById(id);
 		System.out.println(o.getServices());
-		return repo.findOrderById(id);
+		return orderRepo.findOrderById(id);
 	}
 
 	/**
@@ -80,7 +87,7 @@ public class CrudRestServiceApiController {
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/api/orders")
 	public void addOrder(@RequestBody Order newOrder) {
-		repo.save(newOrder); // Persist the given order to database.
+		orderRepo.save(newOrder); // Persist the given order to database.
 	}
 
 	/**
@@ -95,7 +102,7 @@ public class CrudRestServiceApiController {
 	 */
 	@RequestMapping(method = RequestMethod.PUT, value = "/api/orders/{customerName}")
 	public void updateOrder(@RequestBody Order updateOrder, @PathVariable String customerName) {
-		repo.save(updateOrder); // Update/Edit the existing user.
+		orderRepo.save(updateOrder); // Update/Edit the existing user.
 	}
 
 	/**
@@ -108,6 +115,21 @@ public class CrudRestServiceApiController {
 	 */
 	@RequestMapping(value = "/api/orders/{orderId}", method = RequestMethod.DELETE)
 	public void deleteOrder(@PathVariable("orderId") long orderId) {
-		repo.deleteOrderById(orderId); // Delete order by given order id.
+		orderRepo.deleteOrderById(orderId); // Delete order by given order id.
+	}
+
+	@RequestMapping(value = "/api/customers", method = RequestMethod.GET)
+	public List<Customer> getCustomers() {
+		return customerRepo.findAll();
+	}
+
+	@RequestMapping(value = "/api/customers/{name}", method = RequestMethod.GET)
+	public List<Customer> findCustomersByName(@PathVariable("name") String name) {
+		return customerRepo.findCustomersByName(name);
+	}
+
+	@RequestMapping(value = "/api/customer/{phone}", method = RequestMethod.GET)
+	public Customer findCustomerByPhone(@PathVariable("phone") int phone) {
+		return customerRepo.findCustomerByPhone(phone);
 	}
 }
