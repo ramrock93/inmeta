@@ -84,5 +84,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 	 *            The id of the order to query.
 	 * @return The order which matches the order id is returned.
 	 */
-	public Order findById(long id);
+	public Order findOrderById(long id);
 }

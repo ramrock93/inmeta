@@ -56,14 +56,17 @@ public class CrudRestServiceApiController {
 	 *            parameter in the URI.
 	 * @return The list of orders for the queried customer.
 	 */
-	@RequestMapping(value = "/api/orders/{customerName}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/api/orders/{customerName}", method = RequestMethod.GET)
 	public List<Order> getOrder(@PathVariable("customerName") String customerName) {
 		return repo.findByCustomerName(customerName); // Find and return all registered orders for given customer.
-	}
+	}*/
 
 	@RequestMapping(value = "/api/orders/{id}", method = RequestMethod.GET)
 	public Order getOrder(@PathVariable("id") long id) {
-		return repo.findById(id);
+
+		Order o = repo.findOrderById(id);
+		System.out.println(o.getServices());
+		return repo.findOrderById(id);
 	}
 
 	/**
