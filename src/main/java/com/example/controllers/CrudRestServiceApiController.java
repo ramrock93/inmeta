@@ -61,6 +61,11 @@ public class CrudRestServiceApiController {
 		return repo.findByCustomerName(customerName); // Find and return all registered orders for given customer.
 	}
 
+	@RequestMapping(value = "/api/orders/{id}", method = RequestMethod.GET)
+	public Order getOrder(@PathVariable("id") long id) {
+		return repo.findById(id);
+	}
+
 	/**
 	 * Maps this method to the corresponding POST request from client-side. Creates
 	 * a new order and persists it to the database.</br>
