@@ -52,6 +52,24 @@ public class Customer {
 	protected Customer() {
 
 	}
+	
+	
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
 
 	public void setName(String name) {
 		this.name = name;
