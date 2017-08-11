@@ -95,8 +95,8 @@ public class OrderSoftApplication {
 			Order o1 = new Order(c1, m1, "Kan ikke før 10:00.", LocalDate.of(2017, 9, 15), cleaning_packing_moving);
 			orderRepo.save(o1);
 
-			c1.addOrder(o1);
-			customerRepo.save(c1);
+//			c1.addOrder(o1);
+//			customerRepo.save(c1);
 
 			// ************************************************************************************************************
 
@@ -116,8 +116,8 @@ public class OrderSoftApplication {
 			Order o2 = new Order(c2, m2, "Kan ikke før 10:00.", LocalDate.of(2017, 9, 15), packing_moving);
 			orderRepo.save(o2);
 
-			c2.addOrder(o2);
-			customerRepo.save(c2);
+//			c2.addOrder(o2);
+//			customerRepo.save(c2);
 
 			// ************************************************************************************************************
 
@@ -136,8 +136,8 @@ public class OrderSoftApplication {
 			Order o3 = new Order(c3, m3, "Kan ikke før 10:00.", LocalDate.of(2017, 9, 15), moving);
 			orderRepo.save(o3);
 
-			c3.addOrder(o3);
-			customerRepo.save(c3);
+//			c3.addOrder(o3);
+//			customerRepo.save(c3);
 
 			// ************************************************************************************************************
 
