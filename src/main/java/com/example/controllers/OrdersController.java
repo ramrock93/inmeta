@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.models.Customer;
 import com.example.models.Order;
-import com.example.repositories.CustomerRepository;
 import com.example.repositories.OrderRepository;
 
 /**
@@ -20,9 +18,9 @@ import com.example.repositories.OrderRepository;
  * 
  *         7. aug. 2017 </br>
  *         </br>
- *         The CrudRestServiceApiController class is the OrderSofts' REST
- *         service, responsible for exposing an API to allow
- *         Create-Read-Update-Delete (CRUD) operations.</br>
+ *         The OrdersController class is the OrderSofts' REST service,
+ *         responsible for exposing an API to allow Create-Read-Update-Delete
+ *         (CRUD) operations.</br>
  *         <strong>Examples:</strong></br>
  *         </br>
  *         Get all orders (GET): {@link http://localhost:8080/api/orders} </br>
@@ -34,13 +32,10 @@ import com.example.repositories.OrderRepository;
  *         {@link http://localhost:8080/api/orders/1} </br>
  */
 @RestController
-public class CrudRestServiceApiController {
+public class OrdersController {
 
 	@Autowired
 	private OrderRepository orderRepo; // An order repository object to handle the CRUD-operations.
-
-	@Autowired
-	private CustomerRepository customerRepo;
 
 	/**
 	 * Maps this method to the corresponding GET request from the client-side.
@@ -116,20 +111,5 @@ public class CrudRestServiceApiController {
 	@RequestMapping(value = "/api/orders/{orderId}", method = RequestMethod.DELETE)
 	public void deleteOrder(@PathVariable("orderId") long orderId) {
 		orderRepo.deleteOrderById(orderId); // Delete order by given order id.
-	}
-
-	@RequestMapping(value = "/api/customers", method = RequestMethod.GET)
-	public List<Customer> getCustomers() {
-		return customerRepo.findAll();
-	}
-
-	@RequestMapping(value = "/api/customers/{name}", method = RequestMethod.GET)
-	public List<Customer> findCustomersByName(@PathVariable("name") String name) {
-		return customerRepo.findCustomersByName(name);
-	}
-
-	@RequestMapping(value = "/api/customer/{phone}", method = RequestMethod.GET)
-	public Customer findCustomerByPhone(@PathVariable("phone") int phone) {
-		return customerRepo.findCustomerByPhone(phone);
 	}
 }

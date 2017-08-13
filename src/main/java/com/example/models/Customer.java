@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "customer_table")
 public class Customer {
@@ -33,6 +36,7 @@ public class Customer {
 	private Address currentAddress;
 
 	@OneToMany
+	@JsonManagedReference
 	private List<Order> orders;
 
 	public String getName() {
@@ -52,7 +56,7 @@ public class Customer {
 	protected Customer() {
 
 	}
-	
+
 	public long getId() {
 		return id;
 	}

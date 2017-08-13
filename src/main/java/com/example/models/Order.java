@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
@@ -35,6 +36,7 @@ public class Order {
 	private long id; // The primary key of the table "order_table". This is generated automatically.
 
 	@ManyToOne
+	@JsonBackReference
 	private Customer customer;
 
 	@OneToOne
